@@ -1,4 +1,4 @@
-## **Part 7: Lab 0 Deliverables**
+## **Lab 0 Deliverables**
 
 1. **A single PDF report** (named `Lab0_NS3_Report.pdf`) containing:
 

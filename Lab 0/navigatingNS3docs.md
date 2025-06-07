@@ -161,7 +161,7 @@ Whenever you hit an error, follow these steps:
 
 7. **Ask for Help Early**
 
-   * Best practice: If you spend more than **15 minutes** on a single error, stop and ask the TA or post a question on Discord.
+   * Best practice: If you spend more than **15 minutes** on a single error, stop and post a question on Discord.
    * When asking, provide:
 
      * The **exact error message**.
@@ -169,3 +169,14 @@ Whenever you hit an error, follow these steps:
      * What you have tried.
 
 ---
+
+## **Quick Reference Links**
+
+* **ns-3 Main Site**: [https://www.nsnam.org](https://www.nsnam.org)
+* **ns-3 Download & Release Notes**: [https://www.nsnam.org/releases](https://www.nsnam.org/releases)
+* **C++ Tutorial (HTML)**: [https://www.nsnam.org/docs/release/3.40/tutorial/html/index.html](https://www.nsnam.org/docs/release/3.40/tutorial/html/index.html)
+* **Python Tutorial**: [https://www.nsnam.org/docs/release/3.40/python/tutorial/python\_bindings.html](https://www.nsnam.org/docs/release/3.40/python/tutorial/python_bindings.html)
+* **Doxygen (C++ API)**: [https://www.nsnam.org/docs/release/3.40/doxygen/index.html](https://www.nsnam.org/docs/release/3.40/doxygen/index.html)
+* **Doxygen (Python API)**: [https://www.nsnam.org/docs/release/3.40/doxygen/python/index.html](https://www.nsnam.org/docs/release/3.40/doxygen/python/index.html)
+* **NetAnim Documentation**: [https://www.nsnam.org/docs/release/3.40/netanim-guide.html](https://www.nsnam.org/docs/release/3.40/netanim-guide.html)
+* **FAQ & Troubleshooting**: [https://www.nsnam.org/docs/release/3.40/faq/](https://www.nsnam.org/docs/release/3.40/faq/)

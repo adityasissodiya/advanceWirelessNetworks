@@ -1,5 +1,5 @@
 
-## **Part 4: Enabling Visualization**
+## **Enabling Visualization**
 
 Seeing packets “move” in ns-3 helps build intuition. We will use **NetAnim** (XML-based animator) for C++ and Python.
 

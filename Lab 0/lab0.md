@@ -543,14 +543,3 @@ Place these WSL instructions **right after** the bullet list of “Software Depe
 > * You understand how to create nodes, schedule events, and stop the simulation from Python.
 
 ---
-
-## **Appendix A: Quick Reference Links**
-
-* **ns-3 Main Site**: [https://www.nsnam.org](https://www.nsnam.org)
-* **ns-3 Download & Release Notes**: [https://www.nsnam.org/releases](https://www.nsnam.org/releases)
-* **C++ Tutorial (HTML)**: [https://www.nsnam.org/docs/release/3.40/tutorial/html/index.html](https://www.nsnam.org/docs/release/3.40/tutorial/html/index.html)
-* **Python Tutorial**: [https://www.nsnam.org/docs/release/3.40/python/tutorial/python\_bindings.html](https://www.nsnam.org/docs/release/3.40/python/tutorial/python_bindings.html)
-* **Doxygen (C++ API)**: [https://www.nsnam.org/docs/release/3.40/doxygen/index.html](https://www.nsnam.org/docs/release/3.40/doxygen/index.html)
-* **Doxygen (Python API)**: [https://www.nsnam.org/docs/release/3.40/doxygen/python/index.html](https://www.nsnam.org/docs/release/3.40/doxygen/python/index.html)
-* **NetAnim Documentation**: [https://www.nsnam.org/docs/release/3.40/netanim-guide.html](https://www.nsnam.org/docs/release/3.40/netanim-guide.html)
-* **FAQ & Troubleshooting**: [https://www.nsnam.org/docs/release/3.40/faq/](https://www.nsnam.org/docs/release/3.40/faq/)
