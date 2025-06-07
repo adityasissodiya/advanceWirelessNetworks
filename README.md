@@ -1,7 +1,3 @@
-Here’s a complete **`README.md`** for the root of your repository.  It gives newcomers a concise yet self-contained overview of the five labs, the mixed C++/Python approach, required tooling, folder layout, and how to build/run everything on Linux, WSL 2, or native macOS.
-
----
-
 ```markdown
 # Advanced Wireless Networks – ns-3 Lab Series (2025 Edition)
 
