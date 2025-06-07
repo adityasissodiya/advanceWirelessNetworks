@@ -14,7 +14,7 @@ Each lab comes in two flavours:
 * **Python** — uses the official pybindgen bindings so students who prefer Python aren’t left behind.
 
 You’re free to stick to one language or mix both as you progress.
-
+```
 ---
 
 ## Table of Contents
