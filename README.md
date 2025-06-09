@@ -53,7 +53,6 @@ Build output (object files, NetAnim XML, pcaps) stays inside your local **ns-3 b
   ```bash
   ./waf configure --enable-examples --enable-tests --enable-python-bindings
   ./waf build
-````
 
 * `PYTHONPATH=~/ns-3.40/build/bindings:$PYTHONPATH` is set for Python runs.
 
