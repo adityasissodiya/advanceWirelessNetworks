@@ -1,4 +1,4 @@
-```markdown
+
 # Advanced Wireless Networks – ns-3 Lab Series (2025 Edition)
 
 > **Course code:** D7030E    
@@ -14,16 +14,6 @@ Each lab comes in two flavours:
 * **Python** — uses the official pybindgen bindings so students who prefer Python aren’t left behind.
 
 You’re free to stick to one language or mix both as you progress.
-```
----
-
-## Table of Contents
-1. [Folder Layout](#folder-layout)  
-2. [Prerequisites](#prerequisites)  
-3. [Quick-start: Build ns-3 & Run a Lab](#quick-start-build-ns-3--run-a-lab)  
-4. [Lab Overviews](#lab-overviews)  
-5. [Troubleshooting Cheat-Sheet](#troubleshooting-cheat-sheet)  
-6. [License](#license)
 
 ---
 
@@ -44,11 +34,6 @@ You’re free to stick to one language or mix both as you progress.
 └── README.md          # you’re here
 
 ````
-
-*Every lab folder contains*  
-`c++/*.cc`  C++ source  
-`python/*.py`  matching Python scripts  
-`docs/*.pdf`  problem statement, grading rubric, and example figures
 
 Build output (object files, NetAnim XML, pcaps) stays inside your local **ns-3 build tree**, not in this repo.
 
@@ -71,38 +56,6 @@ Build output (object files, NetAnim XML, pcaps) stays inside your local **ns-3 b
 ````
 
 * `PYTHONPATH=~/ns-3.40/build/bindings:$PYTHONPATH` is set for Python runs.
-
----
-
-## Quick-start: Build ns-3 & Run a Lab
-
-```bash
-# 1. Clone this lab repo
-git clone https://github.com/<your-org>/ltu-ns3-labs.git
-cd ltu-ns3-labs
-
-# 2. Build ns-3 (if you haven’t)
-cd ~/ns-3.40
-./waf configure --enable-examples --enable-tests --enable-python-bindings
-./waf build
-
-# 3. Copy a lab source file into the ns-3 scratch directory
-cp ../ltu-ns3-labs/lab1_propagation/c++/Lab1_Cpp_TwoRay.cc scratch/
-
-# 4. Run it
-./waf --run scratch/Lab1_Cpp_TwoRay --command-template="%s --distance=50"
-
-# 5. Visualise (optional)
-netanim lab1-two-ray.xml
-```
-
-Python version:
-
-```bash
-export PYTHONPATH=~/ns-3.40/build/bindings:$PYTHONPATH
-cp ../ltu-ns3-labs/lab1_propagation/python/Lab1_Py_TwoRay.py scratch/
-./waf --pyrun scratch/Lab1_Py_TwoRay.py --distance=50
-```
 
 ---
 
