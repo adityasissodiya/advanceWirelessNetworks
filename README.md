@@ -1,7 +1,7 @@
 # Advanced Wireless Networks – ns-3 Lab Series (2025 Edition)
 
 > **Course code:** D7030E    
-> **University:** Luleå University of Technology 
+> **University:** Luleå University of Technology   
 > **Languages:** C++ **and** Python bindings for ns-3  
 > **Latest tested ns-3 release:** 3.40 (works with 3.41+)
 
