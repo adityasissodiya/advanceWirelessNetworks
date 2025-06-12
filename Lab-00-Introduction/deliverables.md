@@ -1,51 +1,43 @@
-## **Lab 0 Deliverables**
+# Lab 00 Deliverables
 
-1. **A single PDF report** (named `Lab0_NS3_Report.pdf`) containing:
+Submit a single ZIP archive (or a pull request) containing the following **in `Lab-00-Introduction/submission/`**:
 
-   * **Section 1: Installation Verification**
+1. **Language choice**  
+   - `choice.txt` — exactly one line, either  
+     ```
+     C++
+     ```  
+     or  
+     ```
+     Python
+     ```
 
-     * Screen captures (or pasted console logs) showing:
+2. **Console output**  
+   - If **C++** chosen:  
+     - `hello_cpp_output.txt` — capture the output of  
+       ```
+       ./build/src/core/examples/hello-simulator
+       ```  
+       It must contain at least the line  
+       ```
+       Hello Simulator
+       ```
+   - If **Python** chosen:  
+     - `hello_py_output.txt` — capture the output of  
+       ```
+       python3 scratch/Lab0_Py_Hello.py
+       ```  
+       It must contain at least the line  
+       ```
+       Hello from Python after 1 second
+       ```
 
-       * `./waf --run hello-simulator` output in C++.
-       * `./waf --pyrun scratch/hello_py.py` output in Python.
-
-   * **Section 2: Documentation Walkthrough**
-
-     * A short paragraph (1–2 sentences each) describing:
-
-       1. Where you found the C++ API pages for `Simulator`, `NodeContainer`, and `PointToPointHelper`. Provide links.
-       2. Where you located the Python binding documentation (link to Python tutorial).
-
-   * **Section 3: “Hello, Simulator!” Code Snippets**
-
-     * Paste your final `hello-sim.cc` and `hello_py.py` code (with your modifications).
-     * Under each snippet, bullet-point the key lines you added and why.
-
-   * **Section 4: Visualization Screenshots**
-
-     * Two screenshots (or embedded images) of **NetAnim** running:
-
-       1. C++ version (`hello-animation.xml`) – show node positions and a packet animation frame.
-       2. Python version (`hello_py_animation.xml`).
-     * Briefly explain in 2–3 sentences how enabling `AnimationInterface` created that XML.
-
-   * **Section 5: Troubleshooting Log**
-
-     * For each “Likely Issue” from this lab (1–13), write:
-
-       1. A one-sentence description of the cause.
-       2. The exact command or code change you applied to fix it.
-
-2. **Name your Python binding scripts** exactly:
-
-   * `hello_py.py`
-   * `hello_py_anim.py`
-
-3. **Name your C++ scripts** exactly:
-
-   * `hello-sim.cc`
-   * `hello-sim-anim.cc`
-
-4. **Submit all four scripts** along with the PDF in a single compressed archive named `Lab0_Submission.zip`.
+3. **NetAnim XML & screenshot**  
+   - If **C++** chosen:  
+     - `lab0_cpp_anim.xml` — the XML you generated in Part 3.  
+     - `anim_screenshot_cpp.png` — a screenshot of NetAnim displaying your two‐node “Hello” simulation.
+   - If **Python** chosen:  
+     - `lab0_py_anim.xml`  
+     - `anim_screenshot_py.png`
 
 ---

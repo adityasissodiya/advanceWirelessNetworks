@@ -1,62 +1,96 @@
 # Advanced Wireless Networks – ns-3 Lab Series (2025 Edition)
 
-> **Course code:** D7030E    
+> **Course code:** D7030E  
 > **University:** Luleå University of Technology   
-> **Languages:** C++ **and** Python bindings for ns-3  
-> **Latest tested ns-3 release:** 3.40 (works with 3.41+)
+> **Languages:** C++ **or** Python bindings for ns-3 (choose one)  
+> **ns-3 version:** 3.40 (tested; compatibility with 3.41+ unverified)
 
-This repository contains **five incremental laboratories (Lab 0 – Lab 4)** designed to teach hands-on network-simulation skills with the **ns-3** discrete-event simulator.  
-Each lab comes in two flavours:
-
-- **C++** — matches the canonical ns-3 workflow via CMake  
-- **Python** — uses the official pybindgen bindings so Python-loving students aren’t left behind
-
-You’re free to stick to one language or mix both as you progress.
+This repository comprises five incremental laboratories (Lab 0–Lab 4) that teach hands-on network-simulation with ns-3. Each lab may be completed in C++ or Python; you are not required to do both.
 
 ---
 
-## Folder Layout
+## Project Layout
 
 ```
 .
-├── lab0\_intro/
-│   ├── code/         # C++ & Python starter scripts
-│   └── docs/         # PDF instructions + sample report template
-├── lab1\_propagation/
-│   ├── code/
-│   └── docs/
-├── lab2\_wifi/
-│   ├── code/
-│   └── docs/
-├── lab3\_adhoc/
-│   ├── code/
-│   └── docs/
-├── lab4\_lte/
-│   ├── code/
-│   └── docs/
-├── common/           # utility scripts (plotting, seed helper, etc.)
-└── README.md         # you’re here
-```
+├── README.md                     # Top-level overview & quick-start
+├── .gitignore                    # e.g. “build/”, “ns-3*/build/”, “*.pyc”
+├── common/                       # Shared assets and guides
+│   ├── setup.md                  # Cross-lab “install & build” instructions
+│   ├── troubleshooting.md        # Consolidated troubleshooting & cheat-sheet
+│   ├── links.md                  # Common Doxygen & tutorial links
+│   └── scripts/                  # Utility scripts (e.g. plotting, seed management)
+│       ├── plot_helper.py
+│       └── seed_manager.sh
+│
+├── Lab-00-Introduction/          
+│   ├── docs/                     
+│   │   ├── Lab-00-Instructions.pdf  
+│   │   └── Lab-00-Report-Template.pdf
+│   ├── code/                     
+│   │   ├── Lab0_Cpp_Hello.cc     # C++ starter “Hello Simulator”
+│   │   └── Lab0_Py_Hello.py      # Python starter “Hello Simulator”
+│   └── deliverables.md           # What to submit for Lab 0
+│
+├── Lab-01-Propagation/           
+│   ├── docs/                     
+│   │   ├── Lab-01-Instructions.pdf
+│   │   └── Lab-01-Report-Template.pdf
+│   ├── code/                     
+│   │   ├── Lab1_Cpp_TwoRay.cc
+│   │   ├── Lab1_Cpp_Cost231.cc
+│   │   ├── Lab1_Cpp_Friis.cc
+│   │   ├── Lab1_Py_TwoRay.py
+│   │   ├── Lab1_Py_Cost231.py
+│   │   └── Lab1_Py_Friis.py
+│   └── deliverables.md           # What to submit for Lab 1
+│
+├── Lab-02-WiFiPerformance/       
+│   ├── docs/                     
+│   │   ├── Lab-02-Instructions.pdf
+│   │   └── Lab-02-Report-Template.pdf
+│   ├── code/                     
+│   │   ├── Lab2_Cpp_Scenario1.cc
+│   │   ├── Lab2_Cpp_Scenario2.cc
+│   │   ├── Lab2_Py_Scenario1.py
+│   │   └── Lab2_Py_Scenario2.py
+│   └── deliverables.md           # What to submit for Lab 2
+│
+├── Lab-03-Adhoc/                 
+│   ├── docs/                     
+│   │   ├── Lab-03-Instructions.pdf
+│   │   └── Lab-03-Report-Template.pdf
+│   ├── code/                     
+│   │   ├── Lab3_Cpp_Adhoc.cc
+│   │   ├── Lab3_Cpp_PayloadSweep.cc
+│   │   ├── Lab3_Cpp_TCP.cc
+│   │   ├── Lab3_Cpp_Hidden.cc
+│   │   ├── Lab3_Py_Adhoc.py
+│   │   ├── Lab3_Py_PayloadSweep.py
+│   │   ├── Lab3_Py_TCP.py
+│   │   └── Lab3_Py_Hidden.py
+│   └── deliverables.md           # What to submit for Lab 3
+│
+└── Lab-04-LTE/                    
+    ├── docs/                     
+    │   ├── Lab-04-Instructions.pdf
+    │   └── Lab-04-Report-Template.pdf
+    ├── code/                     
+    │   ├── Lab4_Cpp_LTE.cc
+    │   └── Lab4_Py_LTE.py
+    └── deliverables.md           # What to submit for Lab 
+````
 
-
-
-Build output (object files, NetAnim XML, pcaps) stays inside your local **ns-3 build tree**, not in this repo.
+Build artifacts (object files, NetAnim XML, pcap traces) reside in your local ns-3 build tree, not in this repository.
 
 ---
 
 ## Prerequisites
 
-| Platform                 | Steps                                                                                                                                           |
-|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Native Linux**         | Follow Lab 0 PDF. Key packages: `build-essential`, `python3-dev`, `cmake`, `qtbase5-dev`, `qttools5-dev-tools`, `netanim`, `wireshark`, `matplotlib`. |
-| **Windows 10/11 (WSL2)** | See Lab 0 “Windows Users” instructions: enable WSL2, install Ubuntu, then install the same Ubuntu packages above.                                |
-| **macOS Sonoma**         | `brew install python@3 cmake qt wireshark gnuplot`; then install Python deps via `pip3 install matplotlib pybindgen`.                           |
-
-_All labs assume:_
-
-- ns-3 is extracted to `~/ns-allinone-3.40/` (or newer).
-- You have run the top-level build script with examples, tests, and Python bindings.
-- Your `PYTHONPATH` includes `~/ns-allinone-3.40/ns-3.40/build/bindings`.
+- **Ubuntu 22.04+ / WSL 2 / Fedora 35+ / macOS Sonoma**  
+- **Disk:** ≥ 10 GB free  
+- **RAM:** ≥ 4 GB (8 GB+ recommended)  
+- **Dependencies:** see [common/setup.md](common/setup.md)  
 
 ---
 
@@ -68,29 +102,32 @@ _All labs assume:_
    wget https://www.nsnam.org/releases/ns-allinone-3.40.tar.bz2
    tar xjf ns-allinone-3.40.tar.bz2
    cd ns-allinone-3.40
+   ````
 
-2. **Build everything**
+2. **Build all components**
 
    ```bash
-   ./build.py --enable-examples --enable-tests --enable-python-bindings \
-              --qmake-path /usr/lib/qt5/bin/qmake
+   ./build.py \
+     --enable-examples \
+     --enable-tests \
+     --enable-python-bindings \
+     --qmake-path /usr/lib/qt5/bin/qmake
    ```
 
-3. **Configure & build via CMake**
+3. **Configure & compile via CMake**
 
    ```bash
    cd ns-3.40
    cmake -S . -B build \
-         -DNS3_BUILD_EXAMPLES=ON \
-         -DNS3_BUILD_TESTS=ON \
-         -DNS3_BUILD_PYTHON_BINDINGS=ON
+     -DNS3_BUILD_EXAMPLES=ON \
+     -DNS3_BUILD_TESTS=ON \
+     -DNS3_BUILD_PYTHON_BINDINGS=ON
    cmake --build build -j$(nproc)
    ```
 
 4. **Run an example**
 
    ```bash
-   # Find the binary, e.g.:
    ./build/src/core/examples/hello-simulator
    ```
 
@@ -101,32 +138,36 @@ _All labs assume:_
    python3 scratch/hello_py.py
    ```
 
+For detailed steps, see [common/setup.md](common/setup.md).
+
 ---
 
 ## Lab Overviews
 
-| Lab                          | Core Theme                                                          | What You Build & Measure                              | Key Skills                                      |
-| ---------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------- |
-| **Lab 0 – Introduction**     | ns-3 install (C++/Python), WSL2 setup, minimal simulation & NetAnim | “Hello” in C++/Python; basic visualization            | Build system, Python bindings, troubleshooting  |
-| **Lab 1 – Propagation**      | Two-node WiFi, compare loss models (Two-Ray/Cost231/Friis)          | Throughput vs. distance; find border range *dᵢ*       | Loss models, FlowMonitor, plotting              |
-| **Lab 2 – WiFi Networks**    | Infrastructure WiFi, payload & rate sweeps, hidden-terminal         | Triangle topologies; RTS/CTS on/off; throughput plots | RngSeedManager, PCAP timing, Wireshark analysis |
-| **Lab 3 – Ad-hoc Multi-hop** | UDP vs TCP over 3–6 hop chain                                       | Throughput vs hops & packet size; hidden-terminal     | Routing helpers, TCP MSS tuning                 |
-| **Lab 4 – LTE Module**       | EPC + eNodeB + UE, antenna patterns                                 | LTE traces; DL/UL throughput vs rate & distance       | LENA API, RLC vs PDCP stats analysis            |
+| Lab                      | Theme                                                  | Deliverables                  |
+| ------------------------ | ------------------------------------------------------ | ----------------------------- |
+| **Lab 0** – Introduction | Installation, “Hello ns-3!” demo, NetAnim basics       | see `Lab-00-Introduction/`    |
+| **Lab 1** – Propagation  | Two-Ray vs Cost231 vs Friis loss models                | see `Lab-01-Propagation/`     |
+| **Lab 2** – WiFi Perf.   | Payload/rate sweeps, hidden-terminal in infrastructure | see `Lab-02-WiFiPerformance/` |
+| **Lab 3** – Ad-hoc       | Multi-hop UDP/TCP chains, hidden-terminal in ad-hoc    | see `Lab-03-Adhoc/`           |
+| **Lab 4** – LTE Module   | EPC, eNodeB/UE, antenna patterns, DL/UL throughput     | see `Lab-04-LTE/`             |
 
-Each `lab*/docs/` PDF contains problem statements, deliverables, scoring rubrics, and troubleshooting checklists. Starter code is under `lab*/code/`.
+Each lab’s `deliverables.md` specifies exactly what to submit.
 
 ---
 
-## Troubleshooting Cheat-Sheet
+## Troubleshooting Cheat Sheet
 
-| Problem                                  | Quick Fix                                                                                                                                                       |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ImportError: no module named ns.core`   | `export PYTHONPATH=~/ns-allinone-3.40/ns-3.40/build/bindings:$PYTHONPATH`                                                                                       |
-| Loss-model name typo (`DsssRate5.5Mbps`) | Use exact Doxygen mode strings (e.g. `DsssRate5_5Mbps`)                                                                                                         |
-| RTS/CTS has no effect                    | Set threshold **before** installing devices:<br>`Config::SetDefault("ns3::WifiRemoteStationManager::RtsCtsThreshold","0")`                                      |
-| FlowMonitor reports zero bytes           | Install FlowMonitor **before** applications start; verify IP/port five-tuple matches your flow                                                                  |
-| NetAnim XML not generated                | Ensure you included `#include "ns3/netanim-module.h"` (C++) or `import ns.netanim` (Python) and keep your AnimationInterface alive until `Simulator::Destroy()` |
+Common issues and fixes are consolidated in [common/troubleshooting.md](common/troubleshooting.md). Key examples:
 
-Further fixes are embedded in each lab’s PDF.
+* **ImportError: no module named ns.core**
+  → `export PYTHONPATH=~/ns-allinone-3.40/ns-3.40/build/bindings:$PYTHONPATH`
+* **DsssRate5.5Mbps mode typo**
+  → Use exact Doxygen string: `DsssRate5_5Mbps`
+* **RTS/CTS has no effect**
+  → Set threshold *before* device installation:
+  `Config::SetDefault("ns3::WifiRemoteStationManager::RtsCtsThreshold","0")`
+* **FlowMonitor reports zero bytes**
+  → Install FlowMonitor *before* starting applications
 
 ---
