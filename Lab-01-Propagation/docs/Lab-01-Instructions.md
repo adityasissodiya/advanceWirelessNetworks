@@ -67,7 +67,7 @@ Refer to [common/links.md](../common/links.md) for API and tutorial references.
 
 ### Task (C++): Cost231-Hata Model
 ![COST231 Propagation Loss Model](/common/images/cost231PropogationLoss.png)  
-*This diagram illustrates the COST231-Hata propagation loss model, a widely used empirical formula for predicting path loss in urban and suburban environments. The model extends the original Hata model to frequencies between 1500 and 2000 MHz, making it applicable to GSM and LTE networks. It includes corrections based on base station height, mobile antenna height, distance, frequency, and urban density. The formula supports environment-specific adjustments through correction factors for urban vs rural scenarios.*
+*The COST231-Hata propagation loss model, a widely used empirical formula for predicting path loss in urban and suburban environments. The model extends the original Hata model to frequencies between 1500 and 2000 MHz, making it applicable to GSM and LTE networks. It includes corrections based on base station height, mobile antenna height, distance, frequency, and urban density. The formula supports environment-specific adjustments through correction factors for urban vs rural scenarios.*
 
 Repeat steps 1–6 using `Lab1_Cpp_Cost231.cc` and the Cost231‐Hata model.
 
