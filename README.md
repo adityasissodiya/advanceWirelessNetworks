@@ -28,7 +28,7 @@ This repository comprises five incremental laboratories (Lab 0–Lab 4) that tea
 │   ├── docs/                     
 │   │   ├── Lab-00-Instructions.pdf  
 │   │   └── deliverables.md           # What to submit for Lab 0
-│   ├── code/                     
+│   └── code/                     
 │       ├── Lab0_Cpp_Hello.cc     # C++ starter “Hello Simulator”
 │       └── Lab0_Py_Hello.py      # Python starter “Hello Simulator”
 │
@@ -37,7 +37,7 @@ This repository comprises five incremental laboratories (Lab 0–Lab 4) that tea
 │   ├── docs/                     
 │   │   ├── Lab-01-Instructions.pdf
 │   │   └── deliverables.md           # What to submit for Lab 1
-│   ├── code/                     
+│   └── code/                     
 │       ├── Lab1_Cpp_TwoRay.cc
 │       ├── Lab1_Cpp_Cost231.cc
 │       ├── Lab1_Cpp_Friis.cc
@@ -50,7 +50,7 @@ This repository comprises five incremental laboratories (Lab 0–Lab 4) that tea
 │   ├── docs/                     
 │   │   ├── Lab-02-Instructions.pdf
 │   │   └── deliverables.md           # What to submit for Lab 2
-│   ├── code/                     
+│   └── code/                     
 │       ├── Lab2_Cpp_Scenario1.cc
 │       ├── Lab2_Cpp_Scenario2.cc
 │       ├── Lab2_Py_Scenario1.py
@@ -61,7 +61,7 @@ This repository comprises five incremental laboratories (Lab 0–Lab 4) that tea
 │   ├── docs/                     
 │   │   ├── Lab-03-Instructions.pdf
 │   │   └── deliverables.md           # What to submit for Lab 3
-│   ├── code/                     
+│   └── code/                     
 │       ├── Lab3_Cpp_Adhoc.cc
 │       ├── Lab3_Cpp_PayloadSweep.cc
 │       ├── Lab3_Cpp_TCP.cc
@@ -76,7 +76,7 @@ This repository comprises five incremental laboratories (Lab 0–Lab 4) that tea
     ├── docs/                     
     │   ├── Lab-04-Instructions.pdf
     │   └── deliverables.md           # What to submit for Lab 4
-    ├── code/                     
+    └── code/                     
         ├── Lab4_Cpp_LTE.cc
         └── Lab4_Py_LTE.py
 ````
