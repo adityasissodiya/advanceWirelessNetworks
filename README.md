@@ -14,71 +14,71 @@ This repository comprises five incremental laboratories (Lab 0–Lab 4) that tea
 ```
 .
 ├── README.md                     # Top-level overview & quick-start
-├── .gitignore                    # e.g. “build/”, “ns-3*/build/”, “*.pyc”
-├── common/                       # Shared assets and guides
-│   ├── setup.md                  # Cross-lab “install & build” instructions
+├── .gitignore                    
+├── common/                       
+│   ├── simulation_background.md  # Overview of the simulation architecture used by ns-3
+    ├── setup.md                  # Install & Build instructions
 │   ├── troubleshooting.md        # Consolidated troubleshooting & cheat-sheet
 │   ├── links.md                  # Common Doxygen & tutorial links
-│   └── scripts/                  # Utility scripts (e.g. plotting, seed management)
+│   └── scripts/                  # Utility scripts
 │       ├── plot_helper.py
 │       └── seed_manager.sh
 │
 ├── Lab-00-Introduction/          
 │   ├── docs/                     
 │   │   ├── Lab-00-Instructions.pdf  
-│   │   └── Lab-00-Report-Template.pdf
+│   │   └── deliverables.md           # What to submit for Lab 0
 │   ├── code/                     
-│   │   ├── Lab0_Cpp_Hello.cc     # C++ starter “Hello Simulator”
-│   │   └── Lab0_Py_Hello.py      # Python starter “Hello Simulator”
-│   └── deliverables.md           # What to submit for Lab 0
+│       ├── Lab0_Cpp_Hello.cc     # C++ starter “Hello Simulator”
+│       └── Lab0_Py_Hello.py      # Python starter “Hello Simulator”
+│
 │
 ├── Lab-01-Propagation/           
 │   ├── docs/                     
 │   │   ├── Lab-01-Instructions.pdf
-│   │   └── Lab-01-Report-Template.pdf
+│   │   └── deliverables.md           # What to submit for Lab 1
 │   ├── code/                     
-│   │   ├── Lab1_Cpp_TwoRay.cc
-│   │   ├── Lab1_Cpp_Cost231.cc
-│   │   ├── Lab1_Cpp_Friis.cc
-│   │   ├── Lab1_Py_TwoRay.py
-│   │   ├── Lab1_Py_Cost231.py
-│   │   └── Lab1_Py_Friis.py
-│   └── deliverables.md           # What to submit for Lab 1
+│       ├── Lab1_Cpp_TwoRay.cc
+│       ├── Lab1_Cpp_Cost231.cc
+│       ├── Lab1_Cpp_Friis.cc
+│       ├── Lab1_Py_TwoRay.py
+│       ├── Lab1_Py_Cost231.py
+│       └── Lab1_Py_Friis.py
+│
 │
 ├── Lab-02-WiFiPerformance/       
 │   ├── docs/                     
 │   │   ├── Lab-02-Instructions.pdf
-│   │   └── Lab-02-Report-Template.pdf
+│   │   └── deliverables.md           # What to submit for Lab 2
 │   ├── code/                     
-│   │   ├── Lab2_Cpp_Scenario1.cc
-│   │   ├── Lab2_Cpp_Scenario2.cc
-│   │   ├── Lab2_Py_Scenario1.py
-│   │   └── Lab2_Py_Scenario2.py
-│   └── deliverables.md           # What to submit for Lab 2
+│       ├── Lab2_Cpp_Scenario1.cc
+│       ├── Lab2_Cpp_Scenario2.cc
+│       ├── Lab2_Py_Scenario1.py
+│       └── Lab2_Py_Scenario2.py
+│   
 │
 ├── Lab-03-Adhoc/                 
 │   ├── docs/                     
 │   │   ├── Lab-03-Instructions.pdf
-│   │   └── Lab-03-Report-Template.pdf
+│   │   └── deliverables.md           # What to submit for Lab 3
 │   ├── code/                     
-│   │   ├── Lab3_Cpp_Adhoc.cc
-│   │   ├── Lab3_Cpp_PayloadSweep.cc
-│   │   ├── Lab3_Cpp_TCP.cc
-│   │   ├── Lab3_Cpp_Hidden.cc
-│   │   ├── Lab3_Py_Adhoc.py
-│   │   ├── Lab3_Py_PayloadSweep.py
-│   │   ├── Lab3_Py_TCP.py
-│   │   └── Lab3_Py_Hidden.py
-│   └── deliverables.md           # What to submit for Lab 3
+│       ├── Lab3_Cpp_Adhoc.cc
+│       ├── Lab3_Cpp_PayloadSweep.cc
+│       ├── Lab3_Cpp_TCP.cc
+│       ├── Lab3_Cpp_Hidden.cc
+│       ├── Lab3_Py_Adhoc.py
+│       ├── Lab3_Py_PayloadSweep.py
+│       ├── Lab3_Py_TCP.py
+│       └── Lab3_Py_Hidden.py
+│
 │
 └── Lab-04-LTE/                    
     ├── docs/                     
     │   ├── Lab-04-Instructions.pdf
-    │   └── Lab-04-Report-Template.pdf
+    │   └── deliverables.md           # What to submit for Lab 4
     ├── code/                     
-    │   ├── Lab4_Cpp_LTE.cc
-    │   └── Lab4_Py_LTE.py
-    └── deliverables.md           # What to submit for Lab 
+        ├── Lab4_Cpp_LTE.cc
+        └── Lab4_Py_LTE.py
 ````
 
 Build artifacts (object files, NetAnim XML, pcap traces) reside in your local ns-3 build tree, not in this repository.
