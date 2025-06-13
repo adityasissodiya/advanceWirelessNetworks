@@ -92,6 +92,9 @@ Repeat the C++ steps above using `code/Lab2_Py_Scenario1.py` and `code/Lab2_Py_S
 
 ## Part 2: Packet Size & Hidden-Terminal
 
+![Two-Ray Ground Reflection Model](/common/images/hiddenTerminalScenario.png)  
+*Refer to jayasuriya2004-hidden.pdf*
+
 ### Task (C++): Scenario 2 – Payload Sweep
 
 1. **Copy** `Lab2_Cpp_Scenario1.cc` as base into `scratch/` and rename to `Lab2_Cpp_PayloadSweep.cc`.
