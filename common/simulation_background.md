@@ -16,7 +16,7 @@ Unlike real-time simulators or emulators, ns-3 uses a **discrete-event simulatio
 
 There is **no real-world time constraint**: the simulation might take seconds or minutes to run depending on the complexity, but the simulation time behaves as though it’s unfolding continuously.
 
-> 🔎 More: [NS-3 Manual – Events](https://www.nsnam.org/docs/manual/html/events.html)
+> More: [NS-3 Manual – Events](https://www.nsnam.org/docs/manual/html/events.html)
 
 ---
 
