@@ -17,7 +17,7 @@ This repository comprises five incremental laboratories (Lab 0–Lab 4) that tea
 ├── .gitignore                    
 ├── common/                       
 │   ├── simulation_background.md  # Overview of the simulation architecture used by ns-3
-    ├── setup.md                  # Install & Build instructions
+│   ├── setup.md                  # Install & Build instructions
 │   ├── troubleshooting.md        # Consolidated troubleshooting & cheat-sheet
 │   ├── links.md                  # Common Doxygen & tutorial links
 │   └── scripts/                  # Utility scripts
