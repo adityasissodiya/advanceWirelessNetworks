@@ -1,26 +1,29 @@
-#!/usr/bin/env python3
-# Minimal "Hello, Simulator!" example using ns-3 Python bindings
+from ns import ns
+import cppyy
 
-import ns.core
+# Minimal C++ shim that calls back into Python, then wrap it as an EventImpl
+ns.cppyy.cppdef(r"""
+#include "CPyCppyy/API.h"
+using namespace ns3;
 
+void PySayHello() {
+  CPyCppyy::Eval("say_hello()");
+}
+
+EventImpl* PySayHelloEvent() {
+  return MakeEvent(&PySayHello);
+}
+""")
+
+def say_hello():
+    print("Hello from Python after 1 second")
 
 def main():
-    # Set nanosecond resolution for Time
-    ns.core.Time.SetResolution(ns.core.Time.NS)
-
-    # Schedule a print event at t=1.0s
-    ns.core.Simulator.Schedule(
-        ns.core.Seconds(1.0),
-        lambda: print("Hello from Python after 1 second")
-    )
-
-    # Stop simulation at t=2.0s
+    ev = ns.cppyy.gbl.PySayHelloEvent()           # MakeEvent(...) from C++ side
+    ns.core.Simulator.Schedule(ns.core.Seconds(1.0), ev)
     ns.core.Simulator.Stop(ns.core.Seconds(2.0))
-
-    # Run simulation
     ns.core.Simulator.Run()
     ns.core.Simulator.Destroy()
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
