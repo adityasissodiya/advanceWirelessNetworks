@@ -13,26 +13,63 @@ Each lab can be completed in **either C++ or Python**. You only need to choose o
 ## Repository Structure
 
 ```
-
-.
-├── README.md                # This file
-├── common/                  # Shared resources
-│   ├── setup.md             # Native installation guide (Linux, macOS, WSL)
-│   ├── troubleshooting.md   # Common pitfalls & fixes
-│   ├── simulation\_background.md
-│   ├── links.md             # ns-3 Doxygen, tutorials, references
-│   └── scripts/             # Utilities
-│       ├── setup\_env.sh     # Environment helper (PYTHONPATH etc.)
-│       ├── ci\_smoke.sh      # Smoke test for Docker/CI
-│       ├── plot\_helper.py   # Simple CSV→plot utility
-│       └── seed\_manager.sh
+advanceWirelessNetworks/
+├─ README.md                       # Start here (course overview, setup, FAQs)
+├─ Makefile                        # Convenience targets: docker-build, shell, check, lab0, etc.
+├─ Dockerfile                      # Pinned ns-3.40 image build (Ubuntu 22.04 + cppyy bindings)
+├─ scripts/
+│  ├─ setup_env.sh                 # Exports NS3_DIR, PYTHONPATH, LD_LIBRARY_PATH; sanity import check
+│  └─ ci_smoke.sh                  # Quick end-to-end smoke test inside container (tutorial echo + cppyy)
+│  # (add your own helpers here if needed)
 │
-├── Lab-00-Introduction/     # Hello simulator + NetAnim warm-up
-├── Lab-01-Propagation/      # Propagation loss models
-├── Lab-02-WiFiPerformance/  # Infrastructure Wi-Fi performance
-├── Lab-03-Adhoc/            # Multi-hop ad hoc networks
-└── Lab-04-LTE/              # LTE cellular performance
-
+├─ Lab-00-Introduction/
+│  ├─ README.md                    # Lab-specific walkthrough & deliverables summary
+│  ├─ docs/
+│  │  ├─ Lab-00-Instructions.pdf
+│  │  └─ deliverables.md           # Exact filenames expected
+│  ├─ code/
+│  │  ├─ Lab0_Py_Hello.py          # Python hello (cppyy-native; no pybindgen imports)
+│  │  ├─ Lab0_Cpp_Hello.cc         # C++ hello
+│  │  └─ Lab0_Cpp_AnimRich.cc      # NetAnim demo
+│  └─ submission/                  # You create this; place outputs here (txt, xml, png)
+│     └─ .gitkeep                  # (optional) keep folder in git
+│
+├─ Lab-01-Propagation/
+│  ├─ README.md
+│  ├─ docs/
+│  │  ├─ Lab-01-Instructions.pdf
+│  │  └─ deliverables.md
+│  ├─ code/                        # Friis / Two-Ray / COST231 (C++ and/or Python starters)
+│  └─ submission/                  # CSVs + plots comparing models; measured data if required
+│
+├─ Lab-02-WiFiPerformance/
+│  ├─ README.md
+│  ├─ docs/
+│  │  ├─ Lab-02-Instructions.pdf
+│  │  └─ deliverables.md
+│  ├─ code/                        # Scenario1/Scenario2 (rate sweep, payload sweep, hidden terminals)
+│  └─ submission/                  # scenario1_results.csv, payload_sweep_results.csv, plots, anims
+│
+├─ Lab-03-Adhoc/
+│  ├─ README.md
+│  ├─ docs/
+│  │  ├─ Lab-03-Instructions.pdf
+│  │  └─ deliverables.md
+│  ├─ code/                        # Multi-hop UDP/TCP, payload sweep, hidden terminal variants
+│  └─ submission/
+│
+├─ Lab-04-LTE/
+│  ├─ README.md
+│  ├─ docs/
+│  │  ├─ Lab-04-Instructions.pdf
+│  │  └─ deliverables.md
+│  ├─ code/                        # LTE/EPC downlink scenario (C++ and/or Python)
+│  └─ submission/                  # RLC/PDCP traces + throughput-vs-rate/distance CSVs & plots
+│
+├─ .devcontainer/                  # (optional) VS Code devcontainer
+│  └─ devcontainer.json            # Reopen in Container → builds/uses the Docker image
+└─ .vscode/                        # (optional) editor settings/tasks for students
+   └─ settings.json
 ````
 
 Each `Lab-XX` folder contains:
@@ -124,9 +161,35 @@ Outputs:
 * **NetAnim XML** → open in NetAnim GUI, capture screenshot
 
 ---
+### ⚠️ For Windows Users
+
+ns-3 does **not** build natively with Visual Studio or MSVC.  
+Use one of the following supported options:
+
+1. **Docker Desktop (recommended)**  
+   - Install Docker Desktop for Windows.  
+   - Open a terminal (PowerShell, Git Bash, or WSL).  
+   - Run `make docker-build` then `make shell`.  
+   - Your repo is mounted at `/work` inside the container.
+
+2. **WSL2 (Windows Subsystem for Linux)**  
+   - Install Ubuntu via WSL2: `wsl --install -d Ubuntu`.  
+   - Follow the *native Linux setup* instructions inside WSL.  
+   - Works like a real Linux environment.
+
+3. **NetAnim (GUI visualizer)**  
+   - NetAnim is a **Qt GUI**; it is **not** bundled in Docker.  
+   - To view `.xml` animation files:  
+     - On **Windows 11**: build NetAnim inside WSL2 (WSLg shows GUI natively).  
+     - On **Windows 10**: build NetAnim inside WSL and run it through an X server (e.g. VcXsrv).  
+     - Or build NetAnim directly on Windows using MSYS2 + Qt5.  
+   - Easiest workflow: run simulations in Docker/WSL → copy XML → open with NetAnim on host for screenshots.
+
+👉 **Tip:** Always save your outputs into `Lab-XX-.../submission/` under `/work` in the container. That way they appear in your cloned repo on Windows.
+
+---
 
 ## Lab Overview
-
 | Lab                            | Theme                                      | Key Tasks                                                              |
 | ------------------------------ | ------------------------------------------ | ---------------------------------------------------------------------- |
 | **Lab 00** – Introduction      | Install check, Hello world, NetAnim basics | Run hello sim (C++/Py), generate XML, screenshot                       |
