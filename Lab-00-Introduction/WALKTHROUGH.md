@@ -66,7 +66,9 @@ python3 /work/Lab-00-Introduction/code/Lab0_Py_Hello.py > /work/Lab-00-Introduct
 
 ```bash
 cp /work/Lab-00-Introduction/code/Lab0_Cpp_Hello.cc "$NS3_DIR/scratch/"
+
 cd "$NS3_DIR"
+
 ./ns3 build
 ```
 
@@ -75,7 +77,8 @@ cd "$NS3_DIR"
 ### 3.2 Run it and save output
 
 ```bash
-./ns3 run scratch/Lab0_Cpp_Hello > /work/Lab-00-Introduction/submission/hello_cpp_output.txt
+./ns3 run scratch/Lab0_Cpp_Hello \
+  > /work/Lab-00-Introduction/submission/hello_cpp_output.txt
 ```
 
 * Expected content: “Hello Simulator”.
@@ -93,8 +96,12 @@ Lab-00 also expects you to produce a **NetAnim XML** and open it in the GUI. Use
 cp /work/Lab-00-Introduction/code/Lab0_Cpp_Anim.cc "$NS3_DIR/scratch/"
 
 cd "$NS3_DIR"
+
 ./ns3 build
+
 ./ns3 run "scratch/Lab0_Cpp_Anim --animFile=/work/Lab-00-Introduction/submission/lab0_cpp_anim.xml"
+
+cp lab0_cpp_anim_rich.xml /work/Lab-00-Introduction/submission/
 ```
 
 * The program uses ns-3’s **AnimationInterface** to write the XML.
