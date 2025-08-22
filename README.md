@@ -68,7 +68,7 @@ advanceWirelessNetworks/
 │
 ├─ .devcontainer/                  # (optional) VS Code devcontainer
 │  └─ devcontainer.json            # Reopen in Container → builds/uses the Docker image
-└─ .vscode/                        # (optional) editor settings/tasks for students
+└─ .vscode/                        # (optional) editor settings/tasks
    └─ settings.json
 ````
 
