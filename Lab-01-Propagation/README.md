@@ -30,7 +30,7 @@ Each file sets up a two-node Wi-Fi link and applies the respective propagation m
    ```bash
    cd ~/ns-allinone-3.40/ns-3.40
    ./ns3 build
-   ./ns3 run scratch/Lab1_Cpp_Friis
+   ./ns3 run "scratch/Lab1_Cpp_Cost231 --distance=50"
 
 
 3. Capture output data into a CSV as required (you may need to redirect or modify code to log distance vs throughput).
