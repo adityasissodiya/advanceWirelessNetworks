@@ -1,6 +1,5 @@
-// code/Lab2_Cpp_Scenario1.cc
 // Lab 2 Starter: Infrastructure WiFi Scenario 1 (Single AP, One Sender & Receiver)
-// Usage: cmake-build-dir/src/scratch/Lab2_Cpp_Scenario1 --rate=<Mbps> --seed=<run>
+// Usage (from ns-3 root): ./ns3 run "scratch/Lab2_Cpp_Scenario1 --rate=<Mbps> --seed=<run>"
 
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
@@ -13,13 +12,24 @@
 
 using namespace ns3;
 
+// Map a numeric Mbps to a valid 802.11b WifiMode string
+static std::string ModeForB (double rateMbps)
+{
+  // legal for 11b: 1, 2, 5.5, 11 Mbps
+  if (rateMbps <= 1.0)     return "DsssRate1Mbps";
+  if (rateMbps <= 2.0)     return "DsssRate2Mbps";
+  if (rateMbps <= 5.5)     return "DsssRate5_5Mbps";
+  /* else */                return "DsssRate11Mbps";
+}
+
 int main (int argc, char *argv[])
 {
   // Parameters
-  double rate = 1.0;          // Mbps
+  double rate = 1.0;   // Mbps (intended PHY data mode; we’ll also use it for app rate)
   uint32_t seed = 1;
+
   CommandLine cmd;
-  cmd.AddValue("rate", "Physical layer data rate in Mbps", rate);
+  cmd.AddValue("rate", "Physical layer data rate in Mbps (valid: 1, 2, 5.5, 11; rounded up)", rate);
   cmd.AddValue("seed", "RngRun seed value", seed);
   cmd.Parse(argc, argv);
 
@@ -35,25 +45,29 @@ int main (int argc, char *argv[])
   NodeContainer wifiApNode;
   wifiApNode.Create (1);
 
-  // Configure WiFi channel
+  // Wi-Fi channel
   YansWifiChannelHelper channel = YansWifiChannelHelper::Default();
   channel.SetPropagationDelay("ns3::ConstantSpeedPropagationDelayModel");
 
-  YansWifiPhyHelper phy = YansWifiPhyHelper::Default();
+  // PHY (ns-3.40: no ::Default())
+  YansWifiPhyHelper phy;
   phy.SetChannel(channel.Create());
 
+  // Wi-Fi helpers
   WifiHelper wifi;
-  wifi.SetStandard(WIFI_PHY_STANDARD_80211b);
-  std::ostringstream phyRate;
-  phyRate << rate << "Mbps";
+  // ns-3.40 enum name (old WIFI_PHY_STANDARD_… no longer exists)
+  wifi.SetStandard(WIFI_STANDARD_80211b);
+
+  const std::string mode = ModeForB(rate);
   wifi.SetRemoteStationManager(
       "ns3::ConstantRateWifiManager",
-      "DataMode", StringValue("DsssRate11Mbps"),
-      "ControlMode", StringValue("DsssRate11Mbps")
+      "DataMode", StringValue(mode),
+      "ControlMode", StringValue(mode)
   );
 
   WifiMacHelper mac;
   Ssid ssid = Ssid ("lab2-ssid");
+
   mac.SetType("ns3::StaWifiMac",
               "Ssid", SsidValue(ssid));
   NetDeviceContainer staDevices = wifi.Install(phy, mac, wifiStaNodes);
@@ -75,21 +89,26 @@ int main (int argc, char *argv[])
   mobility.Install(wifiStaNodes);
   mobility.Install(wifiApNode);
 
-  // Install Internet stack
+  // Internet stack
   InternetStackHelper stack;
   stack.Install (wifiApNode);
   stack.Install (wifiStaNodes);
 
   Ipv4AddressHelper address;
   address.SetBase("10.1.2.0", "255.255.255.0");
-  Ipv4InterfaceContainer staInterfaces = address.Assign(staDevices);
+  Ipv4InterfaceContainer staIfaces = address.Assign(staDevices);
   address.Assign(apDevice);
 
-  // OnOff application: node0 -> node1
+  // Application: UDP OnOff node0 -> node1
+  std::ostringstream offered;
+  offered << rate << "Mbps"; // match offered load to chosen PHY mode by default
   OnOffHelper onoff("ns3::UdpSocketFactory",
-                    InetSocketAddress(staInterfaces.GetAddress(1), 9));
-  onoff.SetAttribute("DataRate", StringValue(phyRate.str()));
+                    InetSocketAddress(staIfaces.GetAddress(1), 9));
+  onoff.SetAttribute("DataRate", StringValue(offered.str()));
   onoff.SetAttribute("PacketSize", UintegerValue(1000));
+  onoff.SetAttribute("OnTime",  StringValue("ns3::ConstantRandomVariable[Constant=1]"));
+  onoff.SetAttribute("OffTime", StringValue("ns3::ConstantRandomVariable[Constant=0]"));
+
   ApplicationContainer clientApp = onoff.Install(wifiStaNodes.Get(0));
   clientApp.Start(Seconds(1.0));
   clientApp.Stop(Seconds(10.0));
@@ -110,12 +129,21 @@ int main (int argc, char *argv[])
   Simulator::Stop(Seconds(10.0));
   Simulator::Run();
 
-  // Calculate throughput
+  // Throughput calculation: sum across flows (GetFlowStats returns const map)
   monitor->CheckForLostPackets();
-  auto stats = monitor->GetFlowStats();
-  double rxBytes = stats[1].rxBytes;
-  double throughput = rxBytes * 8.0 / 9.0;  // bps
-  std::cout << "Scenario1 throughput: " << throughput << " bps\n";
+  const auto &stats = monitor->GetFlowStats();
+  uint64_t totalRxBytes = 0;
+  for (const auto &kv : stats) {
+    totalRxBytes += kv.second.rxBytes;
+  }
+  const double activeSecs = 9.0; // 1s..10s
+  const double throughput = (totalRxBytes * 8.0) / activeSecs;  // bps
+
+  std::cout << "Scenario1: PHYMode=" << mode
+            << ", offered=" << offered.str()
+            << ", totalRxBytes=" << totalRxBytes
+            << ", throughput=" << throughput << " bps ("
+            << throughput/1e6 << " Mbps)\n";
 
   Simulator::Destroy();
   return 0;
