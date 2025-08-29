@@ -14,7 +14,14 @@ docker-build:
 	docker build -t $(IMAGE) .
 
 shell: docker-build
-	docker run --rm -it -v $$PWD:/work -w /work $(IMAGE) bash
+	@# Start or attach to a persistent container, but keep the same entrypoint (bash)
+	@if docker ps -a --format '{{.Names}}' | grep -qx 'ns3dev'; then \
+		echo "[shell] Attaching to existing container ns3dev"; \
+		docker start -ai ns3dev; \
+	else \
+		echo "[shell] Creating container ns3dev"; \
+		docker run --name ns3dev -it -v $$PWD:/work -w /work --init $(IMAGE) bash; \
+	fi
 
 check: docker-build
 	docker run --rm -v $$PWD:/work -w /work $(IMAGE) bash -lc "scripts/ci_smoke.sh"
