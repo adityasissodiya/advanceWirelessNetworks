@@ -90,18 +90,9 @@ make docker-build   # Build the ns-3.40 image
 make shell          # Open a shell inside the container
 source scripts/setup_env.sh  # Set ns-3 environment
 ````
-
-Check Python bindings:
-
-```bash
-python3 -c "from ns import ns; print(ns.core.Simulator.Now())"
-```
-
-You can also open the repo in VS Code → “Reopen in Container” (requires Dev Containers extension).
-
 ### Option B: Native Installation
 
-1. Install dependencies (Ubuntu example):
+1. Install dependencies (Ubuntu):
 
    ```bash
    sudo apt-get update && sudo apt-get install -y \
@@ -161,29 +152,191 @@ Outputs:
 * **NetAnim XML** → open in NetAnim GUI, capture screenshot
 
 ---
-### ⚠️ For Windows Users
+## ⚠️ For Windows Users
+### Running Advanced Wireless Networks Labs on Windows
 
-ns-3 does **not** build natively with Visual Studio or MSVC.  
-Use one of the following supported options:
+This repo can be run on Windows using **WSL2** + **Docker Desktop**.  
 
-1. **Docker Desktop (recommended)**  
-   - Install Docker Desktop for Windows.  
-   - Open a terminal (PowerShell, Git Bash, or WSL).  
-   - Run `make docker-build` then `make shell`.  
-   - Your repo is mounted at `/work` inside the container.
+---
 
-2. **WSL2 (Windows Subsystem for Linux)**  
-   - Install Ubuntu via WSL2: `wsl --install -d Ubuntu`.  
-   - Follow the *native Linux setup* instructions inside WSL.  
-   - Works like a real Linux environment.
+### 1. Install prerequisites
 
-3. **NetAnim (GUI visualizer)**  
-   - NetAnim is a **Qt GUI**; it is **not** bundled in Docker.  
-   - To view `.xml` animation files:  
-     - On **Windows 11**: build NetAnim inside WSL2 (WSLg shows GUI natively).  
-     - On **Windows 10**: build NetAnim inside WSL and run it through an X server (e.g. VcXsrv).  
-     - Or build NetAnim directly on Windows using MSYS2 + Qt5.  
-   - Easiest workflow: run simulations in Docker/WSL → copy XML → open with NetAnim on host for screenshots.
+Run **PowerShell as Administrator** and enable WSL + VM Platform:
+
+```powershell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+````
+
+Reboot when prompted.
+
+### Install WSL2 with Ubuntu
+
+```powershell
+wsl --install -d Ubuntu
+```
+
+Verify:
+
+```powershell
+wsl -l -v
+```
+
+Expected:
+
+```
+  NAME      STATE   VERSION
+* Ubuntu    Running 2
+```
+
+If it shows `VERSION 1`, upgrade:
+
+```powershell
+wsl --set-version Ubuntu 2
+```
+
+### Update WSL
+
+```powershell
+wsl --update
+wsl --shutdown
+```
+
+### Install Docker Desktop
+
+1. Download: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+2. During install: ✅ “Use the WSL 2 based engine”.
+
+---
+
+### 2. Configure Docker Desktop
+
+Open **Docker Desktop → Settings**:
+
+* **General**: ✅ *Use the WSL 2 based engine*
+* **Resources → WSL Integration**:
+
+  * ✅ *Enable integration with my default WSL distro*
+  * ✅ toggle **Ubuntu**
+
+Click **Apply & Restart**.
+
+> Note: `wsl -l -v` will list `docker-desktop` and `docker-desktop-data`. These distros are internal to Docker Desktop and may show as `Stopped`. This is normal — you never start them yourself.
+
+---
+
+### 3. Prepare the repo inside WSL
+
+Do **not** build from `/mnt/c/...` (slow, CRLF issues). Copy to your Linux home:
+
+```bash
+# inside Ubuntu WSL shell
+mkdir -p ~/work
+cp -r /mnt/c/Users/<YourWindowsUser>/Downloads/advanceWirelessNetworks ~/work/
+cd ~/work/advanceWirelessNetworks
+```
+
+---
+
+### 4. Install tools inside WSL
+
+```bash
+sudo apt update
+sudo apt install -y make git dos2unix
+```
+
+---
+
+### 5. Workflow (same as Linux/macOS)
+
+All commands are run inside the **Ubuntu WSL shell**:
+
+```bash
+# Build the ns-3.40 Docker image
+make docker-build
+
+# Quick smoke test
+make check
+
+# Enter the dev container
+make shell
+
+# Inside the container shell:
+source scripts/setup_env.sh
+
+# Example: run Lab 1
+cp Lab-01-Propagation/code/Lab1_Cpp_Cost231.cc $NS3_DIR/scratch/
+cd $NS3_DIR
+./ns3 build
+./ns3 run "scratch/Lab1_Cpp_Cost231 --distance=50"
+```
+
+---
+
+### 6. GUI tools (NetAnim)
+
+WSL has no X server by default. To run GUI apps:
+
+* Install [VcXsrv](https://sourceforge.net/projects/vcxsrv/) or [X410](https://x410.dev/) on Windows.
+* In WSL:
+
+  ```bash
+  export DISPLAY=:0
+  ```
+* Then run NetAnim inside the container.
+
+Alternative: run NetAnim from a native Windows ns-3 install.
+
+---
+
+### 7. Troubleshooting
+
+### `docker: command not found` inside Ubuntu
+
+* Docker Desktop isn’t integrated with WSL.
+* Open Docker Desktop → Settings → Resources → WSL Integration → toggle **Ubuntu** ON → Apply & Restart.
+* Then in PowerShell:
+
+  ```powershell
+  wsl --shutdown
+  ```
+
+  Restart Docker Desktop, reopen Ubuntu.
+
+### `wsl -l -v` shows `docker-desktop` as `Stopped`
+
+* Normal. That distro is managed by Docker Desktop internally.
+
+---
+
+### 8. Sanity check
+
+Inside Ubuntu WSL:
+
+```bash
+docker --version
+docker run hello-world
+```
+
+Then from repo:
+
+```bash
+make docker-build
+make check
+```
+
+Expected: the `=== ns-3.40 smoke test ===` output with all 3 steps passing.
+
+---
+
+### 9. Summary
+
+* Use **WSL2 + Docker Desktop**.
+* Keep the repo in your Linux home, not `/mnt/c`.
+* Enforce **LF line endings**.
+* Workflow is the same as Linux/macOS (`make docker-build → make check → make shell → source scripts/setup_env.sh`).
+* GUI tools need an X server (VcXsrv/X410).
+* Don’t install `docker.io` inside Ubuntu — use Docker Desktop integration.
 
 👉 **Tip:** Always save your outputs into `Lab-XX-.../submission/` under `/work` in the container. That way they appear in your cloned repo on Windows.
 
