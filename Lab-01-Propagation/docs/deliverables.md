@@ -1,33 +1,66 @@
-# Lab 01 Deliverables
+# Lab 1 Deliverables
 
-Place all files in `Lab-01-Propagation/submission/`. Submit exactly one archive or pull request with the following:
+## Part I – Simulation (ns-3)
 
-1. **Language choice**  
-   - `choice.txt` containing exactly one line:  
-     ```
-     C++
-     ```  
-     or  
-     ```
-     Python
-     ```
+For each of the four propagation models (Two-Ray Ground, COST231-Hata, Friis, Nakagami):
 
-2. **Simulated propagation data & plots**  
-   For each loss model (Two-Ray, Cost231-Hata, Friis):  
-   - `<model>_results.csv` — two columns `distance,bitrate` with your measured data.  
-     - e.g. `two_ray_results.csv`  
-   - `<model>_plot.png` — plot of bitrate vs. distance.  
-     - e.g. `two_ray_plot.png`
+1. **Initial distance calculation**
 
-3. **Real-world path-loss comparison**  
-   - `measured_pathloss.csv` — two columns `distance,path_loss_db` from your RSSI measurements.  
-   - `friis_pathloss.csv` — two columns `distance,path_loss_db` computed via the Friis formula.  
-   - `pathloss_comparison.png` — combined plot of measured vs. Friis path-loss.
+   * Show how you determined the initial distance *di* (the border of the transmission range) for each model.
+   * Submit as `initial_distance_<model>.txt` (e.g. `initial_distance_friis.txt`).
+
+2. **Simulation results**
+
+   * Run experiments at 8 distances: {di, 7di/8, 6di/8, …, di/8}.
+   * For each model, produce:
+
+     * `<model>_results.csv` — columns: `distance,bitrate`.
+     * `<model>_plot.png` — plot of bitrate vs. distance.
+
+3. **Bitrate calculation evidence**
+
+   * Provide one example Wireshark screenshot (sender & receiver PCAP) showing how you measured bitrate.
+   * Submit as `<model>_wireshark.png` for any one model of your choice.
 
 ---
 
-**File names must match exactly.**  
-Do not include any extra files or build artifacts.  
-Ensure all CSV files have headers and all plots are clearly labeled (axes titles and legend).  
+## Part II – Practical Measurement
+
+1. **Measured RSSI values**
+
+   * Capture RSSI at different distances in a corridor (with at least one corner, as in Fig. 3 of the lab handout).
+   * Submit as `measured_rssi.csv` — columns: `distance,rssi_dbm`.
+
+2. **Path loss calculations**
+
+   * Compute path loss (Tx power – RSSI).
+   * Submit as `measured_pathloss.csv` — columns: `distance,path_loss_db`.
+   * Also compute theoretical path loss with Friis at the same distances.
+   * Submit as `friis_pathloss.csv`.
+
+3. **Plots**
+
+   * `pathloss_comparison.png` — plot measured vs Friis path loss.
+
+4. **Discussion**
+
+   * In `discussion.txt`, answer: *Does the Friis model mimic the measured path loss? Why or why not?*
 
 ---
+
+## File Naming Summary
+
+* `initial_distance_friis.txt`, `initial_distance_tworay.txt`, `initial_distance_cost231.txt`, `initial_distance_nakagami.txt`
+* `friis_results.csv`, `tworay_results.csv`, `cost231_results.csv`, `nakagami_results.csv`
+* `friis_plot.png`, `tworay_plot.png`, `cost231_plot.png`, `nakagami_plot.png`
+* `<model>_wireshark.png` (any one)
+* `measured_rssi.csv`
+* `measured_pathloss.csv`
+* `friis_pathloss.csv`
+* `pathloss_comparison.png`
+* `discussion.txt`
+
+---
+
+**All CSV files must have headers. All plots must include labeled axes and legends.**
+
