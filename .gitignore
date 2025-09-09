@@ -26,4 +26,9 @@ Thumbs.db
 
 # Virtual environments
 venv/
+.venv*/
 .env/
+
+# ns-3 tarballs and extracted dirs
+ns-allinone-*/
+*.tar.bz2
