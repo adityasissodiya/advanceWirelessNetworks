@@ -101,7 +101,7 @@ cd "$NS3_DIR"
 
 ./ns3 run "scratch/Lab0_Cpp_Anim --animFile=/work/Lab-00-Introduction/submission/lab0_cpp_anim.xml"
 
-cp lab0_cpp_anim_rich.xml /work/Lab-00-Introduction/submission/
+cp Lab0_Cpp_Anim.xml /work/Lab-00-Introduction/submission/
 ```
 
 * The program uses ns-3’s **AnimationInterface** to write the XML.
