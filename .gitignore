@@ -32,3 +32,6 @@ venv/
 # ns-3 tarballs and extracted dirs
 ns-allinone-*/
 *.tar.bz2
+
+# submissions
+*.zip
