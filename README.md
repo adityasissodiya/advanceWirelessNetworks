@@ -154,6 +154,9 @@ Outputs:
 
 ---
 ## ⚠️ For Windows Users
+
+[Alternate installation instructions](/common/windows.md)
+
 ### Running Advanced Wireless Networks Labs on Windows
 
 This repo can be run on Windows using **WSL2** + **Docker Desktop**.  
