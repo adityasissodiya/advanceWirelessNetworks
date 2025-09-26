@@ -27,3 +27,8 @@ Thumbs.db
 # Virtual environments
 venv/
 .env/
+
+# Windows-run specific
+netanim
+exec/*
+!exec/CMakeLists.txt
