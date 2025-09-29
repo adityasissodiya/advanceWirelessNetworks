@@ -127,20 +127,6 @@ Repeat the C++ steps above using `code/Lab2_Py_Scenario1.py` and `code/Lab2_Py_S
 ![Two-Ray Ground Reflection Model](/common/images/hiddenTerminalScenario.png)  
 *Refer to jayasuriya2004-hidden.pdf*
 
-### Task (C++): Scenario 2 – Payload Sweep
-
-1. **Copy** `Lab2_Cpp_Scenario1.cc` as base into `scratch/` and rename to `Lab2_Cpp_PayloadSweep.cc`.
-2. **Modify** for distances = *dᵢ*/2 from Lab 1.
-3. **Sweep** PHY rates {1, 5.5, 11 Mbps} × payloads {400, 700, 1000 B} → 9 experiments.
-4. **Measure** throughput for each combination.
-5. **Plot** throughput vs. payload for each PHY rate.
-
-**Likely issues:**
-
-* Invalid DataMode string: check [common/links.md](../common/links.md) for exact mode names.
-
----
-
 ## Deliverables
 
 See [`deliverables.md`](deliverables.md).
