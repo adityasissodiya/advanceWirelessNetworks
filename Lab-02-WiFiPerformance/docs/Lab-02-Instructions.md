@@ -30,22 +30,54 @@ By the end of this lab you will:
 
 1. **Copy** `code/Lab2_Cpp_Scenario1.cc` to your `scratch/` directory.  
 2. **Rebuild** ns-3:
-   ```bash
-   cd ~/ns-allinone-3.40/ns-3.40
-   cmake --build build -j$(nproc)
-    ```
-
 3. **Edit** distances in the script to form an equilateral triangle of side 10 m.
 4. **Set** MAC to IEEE 802.11b and traffic to UDP (payload=1000 B).
 5. **Vary** PHY rate ∈ {1, 5.5, 11 Mbps}, running two seeds per rate:
 
-   ```cpp
-   RngSeedManager::SetSeed(1);
-   RngSeedManager::SetRun(1);  // first trial
-   // run sim
-   RngSeedManager::SetRun(2);  // second trial
-   // run sim
-   ```
+### Scenario 1 (single flow, triangle)
+
+Single run:
+
+```bash
+./ns3 run "scratch/Lab2_Cpp_Scenario1 --rate=11 --seed=1"
+```
+
+Full sweep (rates {1, 5.5, 11} × seeds {1, 2}):
+
+```bash
+for r in 1 5.5 11; do
+  for s in 1 2; do
+    ./ns3 run "scratch/Lab2_Cpp_Scenario1 --rate=${r} --seed=${s}"
+  done
+done
+```
+
+### Scenario 2 (two flows, two triangles)
+
+Single run:
+
+```bash
+./ns3 run "scratch/Lab2_Cpp_Scenario2 --rate=11 --seed=1"
+```
+
+Full sweep (rates {1, 5.5, 11} × seeds {1, 2}):
+
+```bash
+for r in 1 5.5 11; do
+  for s in 1 2; do
+    ./ns3 run "scratch/Lab2_Cpp_Scenario2 --rate=${r} --seed=${s}"
+  done
+done
+```
+
+If you want to keep logs:
+
+```bash
+./ns3 run "scratch/Lab2_Cpp_Scenario1 --rate=11 --seed=1" | tee -a scenario1_runs.txt
+./ns3 run "scratch/Lab2_Cpp_Scenario2 --rate=11 --seed=1" | tee -a scenario2_runs.txt
+```
+
+
 6. **Measure** per-trial and average application throughput.
 7. **Visualize** with NetAnim: enable `AnimationInterface` and capture XML.
 
@@ -94,41 +126,6 @@ Repeat the C++ steps above using `code/Lab2_Py_Scenario1.py` and `code/Lab2_Py_S
 
 ![Two-Ray Ground Reflection Model](/common/images/hiddenTerminalScenario.png)  
 *Refer to jayasuriya2004-hidden.pdf*
-
-### Task (C++): Scenario 2 – Payload Sweep
-
-1. **Copy** `Lab2_Cpp_Scenario1.cc` as base into `scratch/` and rename to `Lab2_Cpp_PayloadSweep.cc`.
-2. **Modify** for distances = *dᵢ*/2 from Lab 1.
-3. **Sweep** PHY rates {1, 5.5, 11 Mbps} × payloads {400, 700, 1000 B} → 9 experiments.
-4. **Measure** throughput for each combination.
-5. **Plot** throughput vs. payload for each PHY rate.
-
-**Likely issues:**
-
-* Invalid DataMode string: check [common/links.md](../common/links.md) for exact mode names.
-
----
-
-### Task (C++): Scenario 2 – Hidden Terminal
-
-1. **Copy** `code/Lab2_Cpp_Scenario2.cc` (or `Lab2_Cpp_Hidden.cc`) into `scratch/`.
-2. **Arrange** STA0 at (0,0), AP at (dᵢ,0), STA1 at (2dᵢ,0).
-3. **Install** two OnOff apps (same payload=1000 B, rate=1 Mbps) on ports 9 & 10.
-4. **Run** with RTS/CTS disabled (`RtsCtsThreshold=2200`), measure throughput & PDR.
-5. **Enable** RTS/CTS (`RtsCtsThreshold=0`), rerun, re-measure.
-6. **Compare** results and analyze.
-
-**Likely issues:**
-
-* RTS/CTS no effect: see [3.2 & 3.3 in common/troubleshooting.md](../common/troubleshooting.md#32-rtscts-has-no-effect).
-
----
-
-### Task (Python): Packet Sweep & Hidden Terminal
-
-Repeat Part 2 in Python using analogous scripts (`Lab2_Py_PayloadSweep.py` and a hidden-terminal script). Ensure binding imports and run with identical parameters.
-
----
 
 ## Deliverables
 

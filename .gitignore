@@ -35,3 +35,8 @@ ns-allinone-*/
 
 # submissions
 *.zip
+
+# Windows-run specific
+netanim
+exec/*
+!exec/CMakeLists.txt
