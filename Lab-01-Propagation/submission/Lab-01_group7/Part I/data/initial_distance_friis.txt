@@ -1,0 +1,1 @@
+We chose 10 as initial, no specific reason just, based of one of files present in project files
