@@ -1,0 +1,13 @@
+Used Hotspot on Iphone XR to simulate ad-hoc (as new OS Updates from Macbooks removed Adhoc possiblity). 
+Calculated with 20dBm TX power and 2.4GHz frequency.
+
+Why the pathloss measurement and Friis Model does not match can be of multiple factors:
+- Friis assumes: free space, far-field, perfect LOS, isotropic antennas, no reflections, no shadowing, fixed Tx power, matched polarization. Indoors violates most of these.
+- Indoor corridor: strong multipath and shadowing from walls, doors, metal, and people lead to extra attenuation and fast fading. This adds a near-constant offset (~+13 dB at 1 m) and increases slope beyond 20 dB/decade.
+- Antenna effects: laptop/phone antennas are directional and probably also detuned by hands
+- TX power: 20 dBm is an assumption, the hotspot likely uses power control and unspecified antenna gain.
+- Receiver limits: RSSI bottoms at −91 dBm from 20m onward.
+- Bandwidth/interference: 2.4 GHz is busy. Co-channel interference and noise raise effective loss compared to an empty free-space channel.
+
+Additional note:
+- Measurement imprecision: values were collected with assumptions and approximate positioning, not with calibrated equipment or controlled test setup. This introduces further error and variability.
