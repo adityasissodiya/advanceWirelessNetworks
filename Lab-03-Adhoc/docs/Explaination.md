@@ -76,15 +76,3 @@ CLI flags supported: `--numNodes`, `--pktSize`, `--distance`, `--seed`.
    * Throughput vs **#stations** at **1200 B**. 
 3. A short comparison of **TCP vs UDP** on the 3-node chain (use **300 B** and **1200 B**). 
 4. For hidden terminals: results **with/without RTS/CTS**, including **throughput** and **PDR**, and a brief explanation of the difference. 
-
-## Useful command examples
-
-* **UDP chain (single case):**
-  `Lab3_Cpp_Adhoc --numNodes=5 --pktSize=700 --distance=200 --seed=2` 
-
-* **Payload sweep (inside the sweep program):** it iterates `{300,700,1200}` for you and prints throughput for each. 
-
-* **TCP (3 nodes, segment size = 1200):**
-  `Lab3_Cpp_TCP --pktSize=1200 --seed=1` (remember the 9 s window if you recompute throughput). 
-
-* **Hidden terminal (RTS/CTS ON):** set `RtsCtsThreshold="0"` before installing devices, then run. 
