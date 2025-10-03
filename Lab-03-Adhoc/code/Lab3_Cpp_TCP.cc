@@ -14,18 +14,15 @@
  *  - Topology is a straight line at 0 m, 200 m, 400 m.
  *  - Optional CSV output, PCAP dumps, and NetAnim visualization.
  *
- * Build (typical):
- *   ./waf build
- *
  * Run (examples):
  *   # Default (pkt=1200, seed=1)
- *   ./waf --run "scratch/Lab3_Cpp_TCP"
+ *   --run "scratch/Lab3_Cpp_TCP"
  *
  *   # Segment size 300 B, seed 2, write CSV:
- *   ./waf --run "scratch/Lab3_Cpp_TCP --pktSize=300 --seed=2 --csv=tcp3.csv"
+ *   --run "scratch/Lab3_Cpp_TCP --pktSize=300 --seed=2 --csv=tcp3.csv"
  *
  *   # Enable PCAP / NetAnim if you want to debug:
- *   ./waf --run "scratch/Lab3_Cpp_TCP --enablePcap=1 --enableAnim=1"
+ *   --run "scratch/Lab3_Cpp_TCP --enablePcap=1 --enableAnim=1"
  *
  * CLI flags:
  *   --pktSize    : TCP segment size in bytes (e.g., 300, 1200)
