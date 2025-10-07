@@ -6,7 +6,7 @@
  *
  * - Both STAs transmit UDP to the AP at the same time (t = 1..10 s).
  * - We FIX the PHY to 802.11b at 1 Mb/s (ConstantRate) to keep SNR/MCS constant.
- * - We use Two-Ray Ground so that STA0 and STA1 are hidden from each other
+ * - STA0 and STA1 are hidden from each other
  *   when d is large (e.g., 200 m), but both can hear the AP.
  * - We toggle RTS/CTS via the RtsCtsThreshold attribute on the station manager:
  *     * enableRtsCts = 0  ⇒ threshold 2200 (effectively OFF for normal frames)

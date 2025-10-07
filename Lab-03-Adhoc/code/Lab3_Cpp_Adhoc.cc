@@ -6,7 +6,7 @@
  *
  * What this file does (and why):
  *  - Forces 802.11b @ 1 Mb/s (ConstantRate) to keep the radio mode fixed.
- *  - Uses Two-Ray Ground propagation and 200 m spacing so only adjacent
+ *  - Uses 200 m spacing so only adjacent
  *    nodes can hear each other → true multi-hop path.
  *  - Enables proactive routing (OLSR) so packets actually forward.
  *  - Drives a UDP OnOff source hard enough to saturate the path.
@@ -99,16 +99,23 @@ int main(int argc, char* argv[])
   // giving us a reasonable adjacency-only range at ~200 m spacing.
   YansWifiChannelHelper channel;
   channel.SetPropagationDelay("ns3::ConstantSpeedPropagationDelayModel");
-  channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel");
+  // Pick MaxRange strictly between d and 2d (here: 1.5 * d)
+  double R = distance * 1.5;
+  channel.AddPropagationLoss("ns3::RangePropagationLossModel",
+                           "MaxRange", DoubleValue(R));
 
+  //channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel", "Frequency",   DoubleValue(2.412e9));
+  //channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel", "Frequency",   DoubleValue(2.412e9));
   YansWifiPhyHelper phy;
   phy.SetChannel(channel.Create());
+  // FORCE 2.4 GHz (channel 1 = 2412 MHz, 20 MHz)
+  //phy.Set("OperatingChannel", StringValue("{1, 0, BAND_2_4GHZ, 0}"));
   // Optional: hold TX power fixed (default is usually fine for this lab)
   // phy.Set("TxPowerStart", DoubleValue(16.0)); 
   // phy.Set("TxPowerEnd",   DoubleValue(16.0));
 
   WifiHelper wifi;
-  wifi.SetStandard(WIFI_STANDARD_80211b);
+  wifi.SetStandard(WIFI_STANDARD_80211n);
   // Lock data/control to 1 Mb/s so the MAC/PHY don't change MCS with range.
   wifi.SetRemoteStationManager(
       "ns3::ConstantRateWifiManager",

@@ -5,11 +5,11 @@
 
 You’ll build small **ad-hoc Wi-Fi** networks in ns-3 and measure **application-level throughput** while you vary (a) **hops** and (b) **payload size**. Then you’ll compare **TCP vs UDP** on a 3-node chain. Finally, you’ll reproduce the **hidden-terminal** problem and show how **RTS/CTS** changes the results. 
 
-Core settings you must stick to for the multi-hop experiments: **802.11b**, **constant 1 Mb/s PHY** (no rate fallback), **Two-Ray Ground propagation**, nodes in a **line** with **200 m** spacing so **only adjacent nodes can hear each other** (that’s how we force multi-hop). Also: **routing must be enabled** between stations.
+Core settings you must stick to for the multi-hop experiments: **802.11b**, **constant 1 Mb/s PHY** (no rate fallback), nodes in a **line** with **200 m** spacing so **only adjacent nodes can hear each other** (that’s how we force multi-hop). Also: **routing must be enabled** between stations.
 
 ## What we provide (starters) and what they actually do
 
-* **`Lab3_Cpp_Adhoc.cc`** — baseline **UDP** multi-hop chain. It sets **802.11b** with **ConstantRate 1 Mb/s**, **AdhocWifiMac**, and **Two-Ray Ground**; places nodes on a line at `distance * i`; runs an **OnOff UDP** app from node 0 to the **last** node; records throughput with **FlowMonitor** over the **1–10 s** send window (i.e., 9 seconds). It also writes a **NetAnim** XML.    
+* **`Lab3_Cpp_Adhoc.cc`** — baseline **UDP** multi-hop chain. It sets **802.11b** with **ConstantRate 1 Mb/s**, **AdhocWifiMac**; places nodes on a line at `distance * i`; runs an **OnOff UDP** app from node 0 to the **last** node; records throughput with **FlowMonitor** over the **1–10 s** send window (i.e., 9 seconds). It also writes a **NetAnim** XML.    
 
 * **`Lab3_Cpp_PayloadSweep.cc`** — same radio/topology, but loops over **payload sizes `{300,700,1200}`** and prints throughput per case. Use it to automate the payload sweep.  
 
@@ -23,7 +23,7 @@ Core settings you must stick to for the multi-hop experiments: **802.11b**, **co
 
 ### Part 1 & 2 — Multi-hop UDP (the main study)
 
-* Use **802.11b / DsssRate1Mbps**, **ConstantRate**, **Two-Ray**, **200 m** spacing, **IBSS**. Sender is **node 0**; **last node** is the receiver. Measure **average application throughput**. 
+* Use **802.11b / DsssRate1Mbps**, **ConstantRate**, **200 m** spacing, **IBSS**. Sender is **node 0**; **last node** is the receiver. Measure **average application throughput**. 
 * Vary **number of stations**: `{3, 4, 5, 6}`. Vary **UDP payload**: `{300, 700, 1200}`. For **each** combination, compute throughput. 
 * Plots you must produce:
 
@@ -57,7 +57,7 @@ CLI flags supported: `--numNodes`, `--pktSize`, `--distance`, `--seed`.
 
 * **“Throughput = 0” on the chain?** You forgot **routing**. Multi-hop packets won’t forward themselves. Enable a routing helper (OLSR/AODV) or populate static routes. The lab spec requires routing to be enabled; the instruction sheet also calls out this exact gotcha.  
 
-* **Your nodes all hear each other?** Then you broke the geometry. Keep **200 m spacing** and **Two-Ray**, and place nodes **on a straight line** so only neighbors are in range. 
+* **Your nodes all hear each other?** Then you broke the geometry. Keep **200 m spacing** and place nodes **on a straight line** so only neighbors are in range. 
 
 * **Hidden-terminal confusion:** That starter intentionally uses **AP/STA MACs** (infra) with `StaWifiMac` and `ApWifiMac`. That’s fine for demonstrating RTS/CTS, but don’t mix it up with IBSS used in the chain experiments. 
 

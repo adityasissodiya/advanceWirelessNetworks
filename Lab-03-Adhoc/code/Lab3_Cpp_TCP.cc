@@ -4,7 +4,7 @@
  * This program builds a 3-node linear IBSS (ad-hoc) Wi-Fi chain and
  * measures TCP application throughput from node 0 to node 2
  * (multi-hop via node 1). It fixes the radio to 802.11b 1 Mb/s and
- * uses Two-Ray Ground propagation and OLSR routing.
+ * uses OLSR routing.
  *
  * Key points:
  *  - EXACT send window is [1s, 10s] ⇒ throughput divides by 9 seconds.

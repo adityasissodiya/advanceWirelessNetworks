@@ -3,7 +3,7 @@
  * -------------------------------------------------------------
  * This program automates the runs you need for Parts 1 & 2:
  *  - Varies NUMBER OF NODES (hop count) and UDP PAYLOAD size.
- *  - Uses 802.11b @ 1 Mb/s (ConstantRate), Two-Ray Ground, IBSS (ad-hoc).
+ *  - Uses 802.11b @ 1 Mb/s (ConstantRate), IBSS (ad-hoc).
  *  - Places nodes on a straight line, equally spaced (default 200 m).
  *  - Enables OLSR routing so multi-hop forwarding works.
  *  - Drives an OnOff UDP source from node 0 to the LAST node.
