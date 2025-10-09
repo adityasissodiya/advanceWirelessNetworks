@@ -1,0 +1,45 @@
+Seed 1
+[Scenario1-Part2] PHYMode=DsssRate1Mbps  offered(each)=100Mbps  rxBytes(port9)=170648  rxBytes(port10)=180928
+    throughput flowA(port9):  151687 bps (0.151687 Mbps)
+    throughput flowB(port10): 160825 bps (0.160825 Mbps)
+    aggregate throughput:      312512 bps (0.312512 Mbps)
+Seed 2
+[Scenario1-Part2] PHYMode=DsssRate1Mbps  offered(each)=100Mbps  rxBytes(port9)=180928  rxBytes(port10)=191208
+    throughput flowA(port9):  160825 bps (0.160825 Mbps)
+    throughput flowB(port10): 169963 bps (0.169963 Mbps)
+    aggregate throughput:      330788 bps (0.330788 Mbps)
+Seed 3
+[Scenario1-Part2] PHYMode=DsssRate1Mbps  offered(each)=100Mbps  rxBytes(port9)=186068  rxBytes(port10)=190180
+    throughput flowA(port9):  165394 bps (0.165394 Mbps)
+    throughput flowB(port10): 169049 bps (0.169049 Mbps)
+    aggregate throughput:      334443 bps (0.334443 Mbps)
+Seed 1
+[Scenario1-Part2] PHYMode=DsssRate5_5Mbps  offered(each)=100Mbps  rxBytes(port9)=723712  rxBytes(port10)=742216
+    throughput flowA(port9):  643300 bps (0.6433 Mbps)
+    throughput flowB(port10): 659748 bps (0.659748 Mbps)
+    aggregate throughput:      1.30305e+06 bps (1.30305 Mbps)
+Seed 2
+[Scenario1-Part2] PHYMode=DsssRate5_5Mbps  offered(each)=100Mbps  rxBytes(port9)=810064  rxBytes(port10)=706236
+    throughput flowA(port9):  720057 bps (0.720057 Mbps)
+    throughput flowB(port10): 627765 bps (0.627765 Mbps)
+    aggregate throughput:      1.34782e+06 bps (1.34782 Mbps)
+Seed 3
+[Scenario1-Part2] PHYMode=DsssRate5_5Mbps  offered(each)=100Mbps  rxBytes(port9)=769972  rxBytes(port10)=792588
+    throughput flowA(port9):  684420 bps (0.68442 Mbps)
+    throughput flowB(port10): 704523 bps (0.704523 Mbps)
+    aggregate throughput:      1.38894e+06 bps (1.38894 Mbps)
+Seed 1
+[Scenario1-Part2] PHYMode=DsssRate11Mbps  offered(each)=100Mbps  rxBytes(port9)=1014636  rxBytes(port10)=1104072
+    throughput flowA(port9):  901899 bps (0.901899 Mbps)
+    throughput flowB(port10): 981397 bps (0.981397 Mbps)
+    aggregate throughput:      1.8833e+06 bps (1.8833 Mbps)
+Seed 2
+[Scenario1-Part2] PHYMode=DsssRate11Mbps  offered(each)=100Mbps  rxBytes(port9)=1103044  rxBytes(port10)=1005384
+    throughput flowA(port9):  980484 bps (0.980484 Mbps)
+    throughput flowB(port10): 893675 bps (0.893675 Mbps)
+    aggregate throughput:      1.87416e+06 bps (1.87416 Mbps)
+Seed 3
+[Scenario1-Part2] PHYMode=DsssRate11Mbps  offered(each)=100Mbps  rxBytes(port9)=1011552  rxBytes(port10)=1081456
+    throughput flowA(port9):  899157 bps (0.899157 Mbps)
+    throughput flowB(port10): 961294 bps (0.961294 Mbps)
+    aggregate throughput:      1.86045e+06 bps (1.86045 Mbps)

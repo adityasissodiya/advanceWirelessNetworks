@@ -1,0 +1,18 @@
+Seed 1
+[Scenario1] PHYMode=DsssRate1Mbps  offered=100Mbps  totalRxBytes=478020  throughput=424907 bps (0.424907 Mbps)
+Seed 2
+[Scenario1] PHYMode=DsssRate1Mbps  offered=100Mbps  totalRxBytes=475964  throughput=423079 bps (0.423079 Mbps)
+Seed 3
+[Scenario1] PHYMode=DsssRate1Mbps  offered=100Mbps  totalRxBytes=473908  throughput=421252 bps (0.421252 Mbps)
+Seed 1
+[Scenario1] PHYMode=DsssRate5_5Mbps  offered=100Mbps  totalRxBytes=2000488  throughput=1.77821e+06 bps (1.77821 Mbps)
+Seed 2
+[Scenario1] PHYMode=DsssRate5_5Mbps  offered=100Mbps  totalRxBytes=1993292  throughput=1.77182e+06 bps (1.77182 Mbps)
+Seed 3
+[Scenario1] PHYMode=DsssRate5_5Mbps  offered=100Mbps  totalRxBytes=1993292  throughput=1.77182e+06 bps (1.77182 Mbps)
+Seed 1
+[Scenario1] PHYMode=DsssRate11Mbps  offered=100Mbps  totalRxBytes=3058300  throughput=2.71849e+06 bps (2.71849 Mbps)
+Seed 2
+[Scenario1] PHYMode=DsssRate11Mbps  offered=100Mbps  totalRxBytes=3070636  throughput=2.72945e+06 bps (2.72945 Mbps)
+Seed 3
+[Scenario1] PHYMode=DsssRate11Mbps  offered=100Mbps  totalRxBytes=3060356  throughput=2.72032e+06 bps (2.72032 Mbps)
