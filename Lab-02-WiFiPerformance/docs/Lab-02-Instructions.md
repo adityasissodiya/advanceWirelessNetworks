@@ -46,8 +46,8 @@ Full sweep (rates {1, 5.5, 11} × seeds {1, 2}):
 
 ```bash
 for r in 1 5.5 11; do
-  for s in 1 2; do
-    ./ns3 run "scratch/Lab2_Cpp_Scenario1 --rate=${r} --seed=${s}"
+  for s in 1 2 4; do
+    ./ns3 run "scratch/Lab2_Cpp_Scenario1 --rate=${r} --seed=${s}" | tee -a lab2_scenario1_runs.txt
   done
 done
 ```
@@ -64,8 +64,8 @@ Full sweep (rates {1, 5.5, 11} × seeds {1, 2}):
 
 ```bash
 for r in 1 5.5 11; do
-  for s in 1 2; do
-    ./ns3 run "scratch/Lab2_Cpp_Scenario2 --rate=${r} --seed=${s}"
+  for s in 1 2 4; do
+    ./ns3 run "scratch/Lab2_Cpp_Scenario2 --rate=${r} --seed=${s}" | tee -a lab2_scenario2_runs.txt
   done
 done
 ```
