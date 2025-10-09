@@ -39,3 +39,5 @@ CSV=/work/Lab-01-Propagation/submission/lab1_results_t2.csv
 for d in {1..30}; do
   ./ns3 run "scratch/Lab1_Cpp_Friis --distance=$d"   | sed -n 's/^CSV,model=\(.*\),distance_m=\(.*\),rxBytes=\(.*\),throughput_bps=\(.*\)$/\1,\2,\3,\4/p' >> "$CSV"
 done
+
+for d in 1 5 10 20 30 40 50; do for s in 0 1; do for b in 0 1; do     ./ns3 run "scratch/Lab2_Cpp_Scenario2_p2 --distance=${d} --useRtsCts=${b} --seed=${s}" | tee -a lab2_scenario2_p2_runs.txt;   done; done; done
