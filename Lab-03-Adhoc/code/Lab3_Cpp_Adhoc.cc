@@ -85,9 +85,14 @@ int main(int argc, char* argv[])
   RngSeedManager::SetRun(seedRun);
 
   // Simulation time: allow apps to run 1..10 s; stop at a little after to flush.
-  const double appStart = 1.0;
-  const double appStop  = 10.0;
-  const double simStop  = 11.0;  // a bit of tail for stats/teardown
+  // const double appStart = 1.0;
+  // const double appStop  = 10.0;
+  // const double simStop  = 11.0;  // a bit of tail for stats/teardown
+  
+  const double appStart = 8.0;
+  const double appStop  = 17.0;
+  const double simStop  = 18.0;  // a bit of tail for stats/teardown
+
   const double txWindow = appStop - appStart; // should be 9.0 s
 
   // -------- Create nodes --------
@@ -234,6 +239,7 @@ for (const auto& kv : stats)
             << " -> " << t.destinationAddress << ":" << t.destinationPort
             << " | rxBytes=" << s.rxBytes
             << " | rxPackets=" << s.rxPackets
+            << " | throughput_mbps=" << throughput_mbps
             << " | delaySum=" << s.delaySum.GetSeconds() << " s"
             << " | lost=" << s.lostPackets
             << "\n";

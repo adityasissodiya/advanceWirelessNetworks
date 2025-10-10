@@ -100,9 +100,12 @@ static CaseResult RunOneCase(uint32_t nodesCount,
                              bool enableAnim)
 {
   // FIXED lab timing: send 1..10 s, stop at 11 s.
-  const double appStart = 1.0;
-  const double appStop  = 10.0;
-  const double simStop  = 11.0;
+  // const double appStart = 1.0;
+  // const double appStop  = 10.0;
+  // const double simStop  = 11.0;
+  const double appStart = 8.0;
+  const double appStop  = 17.0;
+  const double simStop  = 18.0;  // a bit of tail for stats/teardown
   const double txWindow = appStop - appStart; // = 9.0
 
   // Deterministic seed + variable run (matches Lab convention).
@@ -116,13 +119,15 @@ static CaseResult RunOneCase(uint32_t nodesCount,
   // ---------------- wifi channel/phy ----------------
   YansWifiChannelHelper channel;
   channel.SetPropagationDelay("ns3::ConstantSpeedPropagationDelayModel");
-  channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel");
+  // channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel");
+  channel.AddPropagationLoss("ns3::RangePropagationLossModel",
+                           "MaxRange", DoubleValue(distance * 2.5));
 
   YansWifiPhyHelper phy;
   phy.SetChannel(channel.Create());
 
   WifiHelper wifi;
-  wifi.SetStandard(WIFI_STANDARD_80211b);
+  wifi.SetStandard(WIFI_STANDARD_80211n);
   wifi.SetRemoteStationManager(
       "ns3::ConstantRateWifiManager",
       "DataMode",    StringValue("DsssRate1Mbps"),
