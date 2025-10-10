@@ -1,0 +1,9 @@
+protocol,appRate,pktSize,seed,rxBytes,throughput_Mbps
+tcp,5Mbps,300,1,281100,0.249867
+tcp,5Mbps,300,2,199800,0.1776
+tcp,5Mbps,1200,1,434400,0.386133
+tcp,5Mbps,1200,2,411600,0.365867
+udp,5Mbps,300,1,448376,0.364533
+udp,5Mbps,300,2,447392,0.363733
+udp,5Mbps,1200,1,395416,0.343467
+udp,5Mbps,1200,2,390504,0.3392

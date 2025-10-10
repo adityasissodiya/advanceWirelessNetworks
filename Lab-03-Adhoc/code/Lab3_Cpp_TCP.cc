@@ -94,9 +94,12 @@ int main(int argc, char* argv[])
   RngSeedManager::SetRun(seedRun);
 
   // Timing: app starts at 1 s and stops at 10 s => 9 s window
-  const double appStart = 1.0;
-  const double appStop  = 10.0;
-  const double simStop  = 11.0;
+  // const double appStart = 1.0;
+  // const double appStop  = 10.0;
+  // const double simStop  = 11.0;
+  const double appStart = 8.0;
+  const double appStop  = 17.0;
+  const double simStop  = 18.0;  // a bit of tail for stats/teardown
   const double txWindow = appStop - appStart; // should be 9.0
 
   // -------- Topology: 3 nodes line (0 m, d, 2d) --------
@@ -106,7 +109,11 @@ int main(int argc, char* argv[])
   // -------- PHY/Channel: 802.11b @ 1 Mb/s, Two-Ray Ground --------
   YansWifiChannelHelper channel;
   channel.SetPropagationDelay("ns3::ConstantSpeedPropagationDelayModel");
-  channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel");
+  // channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel");
+  // Pick MaxRange strictly between d and 2d (here: 1.5 * d)
+  double R = distance * 1.5;
+  channel.AddPropagationLoss("ns3::RangePropagationLossModel",
+                           "MaxRange", DoubleValue(R));
 
   YansWifiPhyHelper phy;
   phy.SetChannel(channel.Create());

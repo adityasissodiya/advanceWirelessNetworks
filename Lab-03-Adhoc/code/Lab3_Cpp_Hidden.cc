@@ -91,7 +91,10 @@ int main(int argc, char* argv[])
   cmd.Parse(argc, argv);
 
   // Timing
-  const double appStart = 1.0, appStop = 10.0, simStop = 11.0;
+  // const double appStart = 1.0, appStop = 10.0, simStop = 11.0;
+  const double appStart = 8.0;
+  const double appStop  = 17.0;
+  const double simStop  = 18.0;  // a bit of tail for stats/teardown
   const double txWindow = appStop - appStart; // 9 s
 
   // Seed/run
@@ -106,7 +109,9 @@ int main(int argc, char* argv[])
   // -------- Channel/PHY (802.11b + Two-Ray) --------
   YansWifiChannelHelper channel;
   channel.SetPropagationDelay("ns3::ConstantSpeedPropagationDelayModel");
-  channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel");
+  // channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel");
+  channel.AddPropagationLoss("ns3::RangePropagationLossModel",
+                           "MaxRange", DoubleValue(distance * 2.5));
 
   YansWifiPhyHelper phy; phy.SetChannel(channel.Create());
 
