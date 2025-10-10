@@ -103,14 +103,30 @@ int main(int argc, char* argv[])
   sta0.Create(1); ap.Create(1); sta1.Create(1);
   NodeContainer all; all.Add(sta0); all.Add(ap); all.Add(sta1);
 
-  // -------- Channel/PHY (802.11b + Two-Ray) --------
-  YansWifiChannelHelper channel;
+   YansWifiChannelHelper channel;
   channel.SetPropagationDelay("ns3::ConstantSpeedPropagationDelayModel");
-  channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel");
+  // Pick MaxRange strictly between d and 2d (here: 1.5 * d)
+  double R = distance * 1.5;
+  channel.AddPropagationLoss("ns3::RangePropagationLossModel",
+                           "MaxRange", DoubleValue(R));
 
-  YansWifiPhyHelper phy; phy.SetChannel(channel.Create());
+  //channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel", "Frequency",   DoubleValue(2.412e9));
+  //channel.AddPropagationLoss("ns3::TwoRayGroundPropagationLossModel", "Frequency",   DoubleValue(2.412e9));
+  YansWifiPhyHelper phy;
+  phy.SetChannel(channel.Create());
+  // FORCE 2.4 GHz (channel 1 = 2412 MHz, 20 MHz)
+  //phy.Set("OperatingChannel", StringValue("{1, 0, BAND_2_4GHZ, 0}"));
+  // Optional: hold TX power fixed (default is usually fine for this lab)
+  // phy.Set("TxPowerStart", DoubleValue(16.0)); 
+  // phy.Set("TxPowerEnd",   DoubleValue(16.0));
 
-  WifiHelper wifi; wifi.SetStandard(WIFI_STANDARD_80211b);
+  WifiHelper wifi;
+  wifi.SetStandard(WIFI_STANDARD_80211n);
+  // Lock data/control to 1 Mb/s so the MAC/PHY don't change MCS with range.
+  wifi.SetRemoteStationManager(
+      "ns3::ConstantRateWifiManager",
+      "DataMode",    StringValue("DsssRate1Mbps"),
+      "ControlMode", StringValue("DsssRate1Mbps"));
   uint32_t rtsThreshold = enableRtsCts ? 0 : 2200;
   wifi.SetRemoteStationManager("ns3::ConstantRateWifiManager",
                                "DataMode",        StringValue("DsssRate1Mbps"),
